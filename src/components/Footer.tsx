@@ -5,7 +5,7 @@ type menuItem = {
     name: string,
     label: string,
     title: string,
-    route: string
+    route: string,
 };
 
 interface Props {
@@ -15,7 +15,6 @@ interface Props {
 }
 
 const Footer = ({menuList, selectedMenu, updateActive}: Props ) => {
-
     const handleMenuChange = (menu: menuItem) => {
         updateActive(menu);
     }

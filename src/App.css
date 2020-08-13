@@ -1,12 +1,3 @@
-/* Phone */
-@media only screen and (max-width: 768px) {}
-
-/* Tablet */
-@media only screen and (min-width: 769px) and (max-width: 900px) {}
-
-/* Laptop */
-@media only screen and (min-width: 901px) {}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -124,11 +115,13 @@ section {
 .Tab {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 10px 30px;
   font-size: 1.1em;
   font-weight: 600;
   list-style-type: none;
+  position: sticky;
+  top: var(--header-height);
 }
 
 .Tab-Item {
@@ -137,6 +130,11 @@ section {
   border-radius: 1.5rem;
   color: var(--disable);
   cursor: pointer;
+  margin-right: 5px;
+}
+
+.Tab-Item:last-child {
+  margin-right: 0;
 }
 
 .Tab-Item-Active {
@@ -275,4 +273,27 @@ section {
 
 .CarRent-Button-Submit:hover {
   background-color: var(--primary-hover);
+}
+
+/* Phone */
+@media only screen and (max-width: 768px) {}
+
+/* Tablet */
+@media only screen and (min-width: 769px) {
+  .Tab-Item {
+    margin-right: 50px;
+  }
+}
+
+/* Laptop */
+@media only screen and (min-width: 901px) {
+  main {
+    max-width: 1000px;
+  }
+
+  .Layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

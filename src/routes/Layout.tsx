@@ -68,9 +68,9 @@ const Layout = () => {
     return (
         <>
             <Header title={selectedMenu.title}/>
-            <div style={{ width: '100%' }}>
+            <div className='Layout' style={{ width: '100%' }}>
                 <Switch>
-                    <Route path="/carrent" exact>
+                    <Route path="/carrent">
                         <CarRent />
                     </Route>
                     <Route path="/" exact>

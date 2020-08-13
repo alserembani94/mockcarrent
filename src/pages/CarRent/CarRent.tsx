@@ -1,10 +1,18 @@
 import React from 'react';
+import {
+    Switch,
+    Route,
+    useHistory,
+    useRouteMatch,
+} from 'react-router-dom';
 
+import FileNotFound from '../404/404';
 import { TabMenu } from '../../components';
 
 type menuItem = {
     name: string,
     label: string,
+    route?: string,
 };
 
 const Art = () => (
@@ -16,29 +24,56 @@ const Art = () => (
 </svg>
 );
 
+// Main Routing for CarRent
 const CarRent = () => {
     const [activeTab, setActiveTab] = React.useState({
         name: 'detailing',
         label: 'Car detailing',
     });
 
+    const history = useHistory();
+    const match = useRouteMatch();
+
     const tabList = [
         {
             name: 'detailing',
             label: 'Car detailing',
+            route: `${match.url}/detailing`,
         },
         {
             name: 'renting',
             label: 'Car rent',
+            route: `${match.url}/renting`,
         },
         {
             name: 'listing',
             label: 'Car Listing',
+            route: `${match.url}/listing`,
         },
     ];
+    const handleActiveTab = (selectedTab: menuItem) => {
+        setActiveTab(selectedTab);
+        selectedTab.route && history.push(selectedTab.route);
 
-    // const [selectedCarIndex, setSelectedCarIndex] = React.useState(0);
+    }
 
+    return (
+        <main className='CarRent'>
+            <TabMenu tabList={tabList} activeTab={activeTab} updateActiveTab={handleActiveTab} />
+            <Switch>
+                <Route path={`${match.path}/renting`}>
+                    <Renting />
+                </Route>
+                <Route path={`${match.path}/`}>
+                    <FileNotFound />
+                </Route>
+            </Switch>
+        </main>
+    );
+}
+
+// Renting Page
+const Renting = () => {
     const carList = [
         {
             brand: 'Perdua',
@@ -55,14 +90,8 @@ const CarRent = () => {
             image: 'https://i.imgur.com/PGa6gF9.png',
         }
     ];
-
-    const handleActiveTab = (selectedTab: menuItem) => {
-        setActiveTab(selectedTab);
-    }
-
     return (
-        <main className='CarRent'>
-            <TabMenu tabList={tabList} activeTab={activeTab} updateActiveTab={handleActiveTab} />
+        <>
             <div className='Seperator' />
             <section className='CarRent-Title'>
                 <p>Select a car</p>
@@ -126,7 +155,7 @@ const CarRent = () => {
                 </div>
                 <div className='CarRent-Button CarRent-Button-Submit' data-button='1'>CONFIRM AND PAY</div>
             </section>
-        </main>
+        </>
     );
 }
 

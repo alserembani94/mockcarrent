@@ -3,6 +3,7 @@ import React from 'react';
 type tabItem = {
     name: string,
     label: string,
+    route?: string,
 };
 
 interface Props {
